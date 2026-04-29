@@ -4,7 +4,7 @@
 
 2. Install dependencies 
     - pip install -r requirements.txt
-    - ollama pull gemma4:e2b
+    - ollama pull gemma3:1b
 
 3. Run Program
     python3 assistant.py
