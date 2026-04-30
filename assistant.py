@@ -24,12 +24,30 @@ while True:
     prompt = input(">>> ")
     if prompt.lower() in ['exit', 'quit']:
         break
-        
-    for chunk in client.chat(
-        model='gemma3:1b', # Make sure this matches your downloaded model
-        messages=[{'role': 'system', 'content': 'Keep responses as brief as possible.'}, 
-                  {'role': 'user', 'content': prompt}],
-        stream=True
-    ):
-        print(chunk['message']['content'], end='', flush=True)
-    print() # newline at end
+
+    # Get the full response from Gemma
+    response = client.chat(
+        model='gemma3:1b',
+        messages=[
+            {'role': 'system', 'content': 'You are a professional email assistant. Always start with "Subject:" followed by "Body:".'},
+            {'role': 'user', 'content': prompt}
+        ]
+    )
+    
+    full_text = response['message']['content']
+    print(f"\nAI Generated:\n{full_text}\n")
+
+    # Basic parsing logic
+    if "Subject:" in full_text and "Body:" in full_text:
+        try:
+            subject = full_text.split("Subject:")[1].split("Body:")[0].strip()
+            body = full_text.split("Body:")[1].strip()
+            
+            confirm = input("Create Gmail draft? (y/n): ")
+            if confirm.lower() == 'y':
+                # 'service' must be initialized earlier in your script
+                create_draft(service, 'me', 'recipient@example.com', subject, body)
+        except Exception as e:
+            print(f"Error parsing email structure: {e}")
+    else:
+        print("AI did not follow the Subject/Body format. Try again.")
