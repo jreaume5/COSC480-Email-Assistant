@@ -7,4 +7,5 @@
     - ollama pull gemma3:1b
 
 3. Run Program
-    python3 assistant.py
+    - ollama serve
+    - python3 assistant.py

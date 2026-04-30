@@ -2,10 +2,12 @@ from ollama import Client
 
 client = Client(host='http://localhost:11434')
 
-for chunk in client.chat(
-    model='gemma3:1b',
-    messages=[{'role': 'user', 'content': 'Why is the sky blue?'}],
-    stream=True
-):
-    print(chunk['message']['content'], end='', flush=True)
-print()  # newline at end
+while True:
+    prompt = input(">>> ")
+    for chunk in client.chat(
+        model='gemma3:1b',
+        messages=[{'role': 'system', 'content': 'Keep responses as brief as possible.'}, {'role': 'user', 'content': prompt}],
+        stream=True
+    ):
+        print(chunk['message']['content'], end='', flush=True)
+    print()  # newline at end
