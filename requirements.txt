@@ -1,3 +1,4 @@
 ollama
 vosk
 sounddevice
+mcp[cli]
