@@ -1,11 +1,11 @@
-import base64
-import os
-from email.message import EmailMessage
-from googleapiclient.discovery import build
 from ollama import Client
 
 
 client = Client(host='http://localhost:11434')
+
+while(True):
+    prompt = input(">>> ")
+
 
     if prompt.lower() in ['exit', 'quit']:
         break
@@ -14,7 +14,7 @@ client = Client(host='http://localhost:11434')
     response = client.chat(
         model='gemma3:1b',
         messages=[
-            {'role': 'system', 'content': 'You are a friendly chatbot designed to make others happy.'},
+            {'role': 'system', 'content': 'You are a friendly chatbot designed to make others happy. Make sure your responses are also less than 250 characters.'},
             {'role': 'user', 'content': prompt}
         ]
     )
