@@ -26,7 +26,7 @@ while True:
         break
         
     for chunk in client.chat(
-        model='gemma3:1b', # Make sure this matches your downloaded model
+        model='gemma3:1b',
         messages=[{'role': 'system', 'content': 'Keep responses as brief as possible.'}, 
                   {'role': 'user', 'content': prompt}],
         stream=True
