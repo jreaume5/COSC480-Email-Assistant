@@ -8,4 +8,4 @@
 
 3. Run Program
     - ollama serve
-    - python3 assistant.py
+    - python3 chatbot.py

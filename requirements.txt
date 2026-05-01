@@ -1,3 +1,1 @@
 ollama
-mcp[cli]
-google-api-python-client
