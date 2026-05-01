@@ -25,7 +25,7 @@ while True:
     if prompt.lower() in ['exit', 'quit']:
         break
 
-    # Get the full response from Gemma
+    # Get the full response from Google Gemma 3 1b
     response = client.chat(
         model='gemma3:1b',
         messages=[
@@ -45,9 +45,9 @@ while True:
             
             confirm = input("Create Gmail draft? (y/n): ")
             if confirm.lower() == 'y':
-                # 'service' must be initialized earlier in your script
                 create_draft(service, 'me', 'recipient@example.com', subject, body)
         except Exception as e:
             print(f"Error parsing email structure: {e}")
     else:
-        print("AI did not follow the Subject/Body format. Try again.")
+        print("Error: AI did not follow the Subject/Body format.")
+    print() # newline
